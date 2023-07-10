@@ -1,9 +1,4 @@
 {
-    
-    "workbench.colorCustomizations": {
-        "tab.activeBorder": "#33b1fff7"
-    },
-    
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
     },
