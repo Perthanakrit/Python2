@@ -11,7 +11,7 @@ if (mins_due < 0):
 tempe = float(input("Temperature: "))
 
 raining = input("Is it raining (y/n)? ")
-raining = raining.capitalize()
+# raining = raining.capitalize()
 
 done = "do"
 
@@ -25,17 +25,14 @@ else:
 if (days > 5):
     done = "not do"
 elif (days < 2):
-    if (tempe > 40.0 or (tempe > 25.0 and raining == "Y")):
+    if (tempe > 40 or (tempe > 25 and (raining == "Y" or raining == "y"))):
         done = "not do"
-    elif (tempe <= 40.0 or (tempe <= 25.0 and raining == "N")):
+    elif (tempe <= 40 or (tempe <= 25 and (raining == "N" or raining == "n"))):
         done = "do"
 elif (days >= 2 and days <= 5):
-    if (tempe > 40.0):
-        if (tempe > 25.0 and raining == "Y"):
-            done = "not do"
-        elif (tempe <= 25.0 and raining == "N"):
-            done = "do"
-    elif (tempe <= 40.0 or (tempe <= 25.0 and raining == "N")):
+    if (tempe > 40 or (tempe > 25 and (raining == "Y" or raining == "y"))):
+        done = "not do"
+    elif (tempe <= 40 or (tempe <= 25 and (raining == "N" or raining == "n"))):
         done = "do"
 
 

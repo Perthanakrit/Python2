@@ -12,15 +12,18 @@
 hours = int(input('Enter number of hours (0-20): '))
 minutes = int(input('Enter number of minutes (0-59): '))
 buyAmt = int(input('Enter shopping amount: '))
+if (buyAmt < 0):
+    buyAmt *= -1
 
 fee = 0
-hours += (minutes // 60 + 1)
-total_hr = hours
 
-if (total_hr < 0 or total_hr > 20 or minutes < 0 or minutes > 59):
+if (hours < 0 or hours > 20 or minutes < 0 or minutes > 59):
     print("Invalid time.")
 
 else:
+    hours += (1 if (minutes % 60) > 0 else 0)
+    total_hr = hours
+
     while (True):
         if (buyAmt < 3001 and total_hr >= 3):
 
@@ -34,10 +37,10 @@ else:
                 fee += 0
                 total_hr -= 1
 
-            if (total_hr <= 0 and fee > 0):
+            if (total_hr <= 2 and fee > 0):
                 print(f"Total amount due is {fee} Baht, thank you.")
                 break
 
-        else:
+        elif (fee != 0 or buyAmt >= 3001 or total_hr < 3):
             print("No charge, thank you.")
             break
