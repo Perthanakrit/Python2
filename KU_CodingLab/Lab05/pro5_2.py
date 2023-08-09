@@ -12,12 +12,21 @@
 hours = int(input('Enter number of hours (0-20): '))
 minutes = int(input('Enter number of minutes (0-59): '))
 buyAmt = int(input('Enter shopping amount: '))
-if (buyAmt < 0):
-    buyAmt *= -1
+
+# if (hours < 0):
+#     hours *= -1
+
+# if (minutes < 0):
+#     minutes *= -1
+
+# if (buyAmt < 0):
+#     buyAmt *= -1
 
 fee = 0
 
-if (hours < 0 or hours > 20 or minutes < 0 or minutes > 59):
+over_min = hours == 20 and minutes >= 1
+
+if (hours < 0 or hours > 20 or minutes < 0 or minutes > 59 or over_min):
     print("Invalid time.")
 
 else:
