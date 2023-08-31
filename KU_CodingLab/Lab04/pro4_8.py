@@ -5,23 +5,17 @@ if (mins_due < 0):
 tempe = float(input("Temperature: "))
 
 raining = input("Is it raining (y/n)? ")
-raining = raining.capitalize()
 
 done = "do"
 
-days = mins_due / 60 / 24
-
-if (days - int(days) >= 0.5):
-    days = int(days) + 1
-else:
-    days = int(days)
+days = (mins_due + 59) / 60 / 24
 
 if (days > 5):
     done = "not do"
-elif (days <= 2):
-    if (tempe > 40 or (tempe > 25 and raining == "Y")):
+elif (days < 2):
+    if (tempe > 40 or (tempe > 25 and (raining == "Y" or raining == "y"))):
         done = "not do"
-    elif (tempe <= 40 or (tempe <= 25 and raining == "N")):
+    elif (tempe <= 40 or (tempe <= 25 and (raining == "N" or raining == "n"))):
         done = "do"
 else:
     if (tempe > 40 or (tempe > 25 and raining == "Y")):
@@ -30,5 +24,5 @@ else:
         done = "do"
 
 
-print(f">>> {days} days before due.")
+print(f">>> {int(days):d} days before due.")
 print(f">>> I will {done} the assignment.")
