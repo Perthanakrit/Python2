@@ -9,10 +9,11 @@ def find_mode(score_lst):
                 count += 1
                 
         mode_lst.append(count)
-    
+    print(mode_lst)
     for  m in range(len(mode_lst)):
         if (max(mode_lst) == mode_lst[m]):
             max_nums.append(m)
+            
     return max_nums
     
 
