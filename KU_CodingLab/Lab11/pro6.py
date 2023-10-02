@@ -20,16 +20,29 @@ def validate_input(str_input):
             return False
     return True
        
+def decode(lst, idx, vowels):
+    if idx < len(lst) - 2 :
+        if (f"{lst[idx]}{lst[idx+1]}{lst[idx+2]}" == f"{lst[idx]}p{lst[idx]}"):
+            return 2
+    elif idx < len(lst) - 1 and idx >= len(lst) - 2:
+        if (f"{lst[idx]}{lst[idx+1]}" == f"{lst[idx]}p"):
+            return 1       
+    return 0
 
 input_word = input().lower()
-
+skip = 0
 if (validate_input(input_word)):
     vowels = ["a", "e", "i", "o", "u"]
     
     txt = ""
-    for i in range(len(input_word)):        
-        if (input_word[i] in vowels):
-            print(slicing_check(input_word, i))
-            
-    
+    for i in range(len(input_word)): 
+        if input_word[i] in vowels and skip <= 0:
+            txt += input_word[i]
+            skip = decode(input_word, i, vowels)
+            continue
+        if skip <= 0:
+            txt += input_word[i]
+        skip -= 1
+        
+    print(txt)
    
