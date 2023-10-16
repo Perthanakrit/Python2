@@ -6,22 +6,23 @@ def toUpper(m_str, idx, symbols):
 
 
 input_str = input()
-symbol = "-_=.$"
-
+symbol = ["-","_","=",".","$"]
+isSymbol = False
 camelCase = ""
 for i in range(len(input_str)):
     current_ch = input_str[i]
-    #if i == 0 and current_ch not in symbol:
-        #camelCase += current_ch.lower()
-        #continue
-    if current_ch in symbol:
-        continue
-    if current_ch.isalpha() or current_ch.isdigit():
-        camelCase += toUpper(input_str, i, symbol)
-    
-    if len(camelCase) <= 1 :
+    if i == 0:
         if current_ch not in symbol:
-            camelCase = camelCase.lower()
+            camelCase += current_ch.lower()
+    else:
+        if current_ch not in symbol:
+            if isSymbol:
+                camelCase += current_ch.upper()
+                isSymbol = False
+            else:
+                camelCase += current_ch.lower()
+        else:
+            isSymbol = True
     
 print(camelCase)
 

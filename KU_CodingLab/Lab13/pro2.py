@@ -3,19 +3,15 @@ def validate(lst):
         return True
     for el in lst:
         if el.isalpha():
-            if el not in "AJQK":
+            if el not in ["A","J","Q","K"]:
                 return True
     return False
 
 def card_value(c):
     if c == "A":
         return 1
-    if c == "J":
-        return 11
-    if c == "Q":
-        return 12
-    if c == "K":
-        return 13
+    if c in ["A","J","Q","K"]:
+        return 10
 
     return int(c)
 

@@ -86,24 +86,26 @@ print(create_factors_3_7(m_ls))
 '''
 
 # List: sort,sort(reverse=True), reverse
-'''
-def filter_sort_factors_3_7(n):
-    new_lst = [[],[]]
-    for el in n:
-        if (el > 0):
-            if (el % 3 == 0 or el % 7 == 0):
-                new_lst[0].append(el)
+def count_factors_3_7(ls):
+    count = 0
+    for item in ls:
+        if item % 3 == 0 or item % 7 == 0:
+            count += 1
+        
+    return count
+
+def filter_factors_3_7(ls):
+    ls_1 = []
+    ls_2 = []
+    i = 1
+    for item in ls:
+        if item > 0:
+            if item % 3==0 or item % 7 == 0:
+                ls_1.append(int(item))
             else:
-                new_lst[1].append(el)
-    new_lst[0].sort()
-    new_lst[1].sort(reverse=True)
-    return new_lst
-
-
-input_lst = [5,9,1,6,2,10,7,21]
-print(filter_sort_factors_3_7(input_lst))
-'''                
-
+                ls_2.append(int(item))
+    return [ls_1, ls_2]
+print( filter_factors_3_7([3,1,7,21,5]) )    
 # count(data) index(data)
                 
 # split(delimeter)
@@ -122,11 +124,18 @@ print(f"{x_value:.1f},{y_value:.1f}")
 
 # List to String : list.join()
 ls = []
-while True:
-    input_str = input()
-    if input_str == "":
-        break
-    ls.append(input_str)
+#while True:
+    #input_str = input()
+    #if input_str == "":
+        #break
+    #ls.append(input_str)
     
-print("".join(ls))
+#print("".join(ls))
     
+#x1, y1 = input().split(",")
+#x2, y2 = input().split(",")
+
+#print(f"{float(x1) + float(x2)},{float(y1) + float(y2)}")
+#text = input()
+#ls = text.split(".")
+
