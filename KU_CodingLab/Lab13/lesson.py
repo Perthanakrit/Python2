@@ -86,6 +86,7 @@ print(create_factors_3_7(m_ls))
 '''
 
 # List: sort,sort(reverse=True), reverse
+'''
 def count_factors_3_7(ls):
     count = 0
     for item in ls:
@@ -105,7 +106,8 @@ def filter_factors_3_7(ls):
             else:
                 ls_2.append(int(item))
     return [ls_1, ls_2]
-print( filter_factors_3_7([3,1,7,21,5]) )    
+print( filter_factors_3_7([3,1,7,21,5]) )   
+'''
 # count(data) index(data)
                 
 # split(delimeter)
@@ -139,3 +141,14 @@ ls = []
 #text = input()
 #ls = text.split(".")
 
+def create_factors_3_7(n):
+    new_lst = []
+    num = 1
+    while len(new_lst) < n:
+        if num % 3 == 0 or num % 7 == 0:
+            new_lst.append(num)
+        num += 1
+    return new_lst
+
+
+print( create_factors_3_7(5) )   

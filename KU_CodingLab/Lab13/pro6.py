@@ -1,33 +1,45 @@
 def check_order(l):
-    non_increasing_count = 0
-    non_decreasing_count = 0
-    for i in range(1, len(l)):
-        if (l[i] < l[i-1]):
-            non_increasing_count += 1
-        elif (l[i] > l[i-1]):
-            non_decreasing_count += 1
-        elif (l[i] == l[i-1]):
-            non_decreasing_count += 1
-            non_increasing_count += 1
+    #non_increasing_count = 0
+    #non_decreasing_count = 0
+    #for i in range(1, len(l)):
+        #if (l[i] < l[i-1]):
+            #non_increasing_count += 1
+        #elif (l[i] > l[i-1]):
+            #non_decreasing_count += 1
+        #elif (l[i] == l[i-1]):
+            #non_decreasing_count += 1
+            #non_increasing_count += 1
 
-    if (non_increasing_count == non_decreasing_count):
+    #if (non_increasing_count == non_decreasing_count):
+        #return "="
+    #else:
+        #if (non_increasing_count == len(l) - 1):
+            #return "-"
+        #if (non_decreasing_count == len(l) - 1):
+            #return "+"
+
+    #return ""
+    increasing = all(l[i] <= l[i+1] for i in range(len(l) - 1))
+    decreasing = all(l[i] >= l[i+1] for i in range(len(l) - 1))
+        
+    if increasing and decreasing:
         return "="
+    elif increasing:
+        return "+"
+    elif decreasing:
+        return "-"
     else:
-        if (non_increasing_count == len(l) - 1):
-            return "-"
-        if (non_decreasing_count == len(l) - 1):
-            return "+"
-
-    return ""
+        return ""    
 
 
 def display(og_lst: list):
+    print("-----")
+    print("Original list:") 
+    print(og_lst)
     if og_lst == []:
         print("The list is empty.")
         return
-    print("-----")
-    print("Original list:")
-    print(og_lst)
+    
     case_type = check_order(og_lst)
     if case_type != "":
         if case_type == "-":

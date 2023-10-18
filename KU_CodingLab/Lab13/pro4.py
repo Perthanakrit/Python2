@@ -26,79 +26,66 @@ Sun  Mom Tue Meb Thu Fri Sat
 20-01   31-01
 02-02   01-01
 False    True
+20-02
+10-10
+44
 '''
 
-def invalid(start_d,end_d):
+
+def invalid(start_d, end_d, first_sun):
     err_count = 0
-    if not (0 < start_d[1] <= 12) or  not (0 < end_d[1] <= 12):
+    # print(start_d, end_d, first_sun)
+    wrong_first_sun = first_sun < 1 or first_sun > 31
+    wrong_day_start, wrong_day_end = False, False
+
+    if not (0 < start_d[1] <= 12) or not (0 < end_d[1] <= 12):
         err_count += 1
         print("Wrong Month")
-    if not (0 < start_d[0] <= 31) or  not (0 < end_d[0] <= 31):
+
+    if (0 < start_d[1] <= 12):
+        wrong_day_start = start_d[0] > days_in_month[start_d[1]]
+
+    if (0 < end_d[1] <= 12):
+        wrong_day_end = end_d[0] > days_in_month[end_d[1]]
+
+    if wrong_day_start or wrong_day_end or wrong_first_sun:
         err_count += 1
-        print("Wrong Day")    
+        print("Wrong Day")
     return err_count >= 1
 
-def create_date(first:int,origin:int ,limit:int, cu_month:int ,start_month:int, end_month:int):
-    ls = []
-    current_sun = first
-    
-    while current_sun <= limit:
-        if  start_month <= cu_month <= end_month or cu_month == 1:
-            if origin <= current_sun <= limit:
-                ls.append(current_sun)
-        current_sun += 7
-    
-    if len(ls) < 1:
-        ls.append(current_sun - 7)        
-        
-    return ls
 
-def sunday_each_month(first_sun, start, end):
-    month = 1
-    sunday_lst = []
-    
-    start_date,start_month = start[0], start[1]
-    end_date, end_month = int(end[0]) if end[1] == month else 31, int(end[1])
-    
-    if start[0] >= start[1] and end[0] >= end[1]: 
-        end_date,start_date = start_date, end_date
-        end_month, start_month = start_month, end_month
-    
-    print(end_date,start_date,"|",end_month, start_month)
-    sunday_lst.append(create_date(first_sun, start_date,end_date, month,start_month, end_month))
-    month += 1
-    
-    #first_sun    
-    while month <= end_month:
-        previous = sunday_lst[len(sunday_lst) - 1]
-        first_sun = previous[len(previous) - 1] + 7
-        if month != 2 and month in thirty_days: # ยน
-            first_sun -= 31
-            end_date = int(end[0]) if int(end[1]) == month else 30
-        elif month in thirty_one_days: # คม
-            first_sun -= (30 if month - 1 != 2 else 28) 
-            end_date = int(end[0]) if int(end[1]) == month else 31
-        elif month == 2:
-            first_sun-= 31
-            end_date = int(end[0]) if int(end[1]) == month else 28
-            
-        sunday_lst.append(create_date(first_sun, first_sun, end_date, month, start_month, end_month))
-        month += 1
-                 
-    return sunday_lst
+days_in_month = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-
-thirty_one_days = [1,3,5,7,8,10,12]
-thirty_days = [4,6,9,11]
-
-start_date = [ int(st) for st in input().split("-")]
-end_date = [ int(st) for st in input().split("-")]
+start_date = [int(st) for st in input().split("-")]
+end_date = [int(st) for st in input().split("-")]
 first_sun_of_month = int(input())
-result = 0
-if not invalid(start_date, end_date):
-    lst = sunday_each_month(first_sun_of_month, start_date, end_date)
-    #print(lst)
-    for i in range(start_date[1] - 1, end_date[1]):
-        result += len(lst[i])
-    
-    print(result)
+
+if start_date[0] >= end_date[0] and start_date[1] >= end_date[1]:
+    end_date[0], start_date[0] = start_date[0], end_date[0]
+    end_date[1], start_date[1] = start_date[1], end_date[1]
+
+if not invalid(start_date, end_date, first_sun_of_month):
+    start, end = 0, 0
+    for i in range(1, end_date[1]+1):
+        if i <= start_date[1]:
+            if i == start_date[1]:
+                start += start_date[0]
+            else:
+                start += days_in_month[i]
+
+        if i == end_date[1]:
+            end += end_date[0]
+            # print(i, start, end)
+        else:
+            end += days_in_month[i]
+
+    sunday = first_sun_of_month
+    count = 0
+
+    for d in range(first_sun_of_month,  end+1):
+        if start <= sunday <= end:
+            # print(sunday, end=" ")
+            count += 1
+        sunday += 7
+    # print()
+    print(count)

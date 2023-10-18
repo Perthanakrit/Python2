@@ -1,7 +1,6 @@
 def round_bomb():
     return ""
 
-
 size_table = input().split("x")
 nRow, nCol = int(size_table[0]), int(size_table[1])
 
@@ -21,8 +20,8 @@ for loc in bombs_loca_ls:
     board[y][x] = "*"
     for dx in [-1,0,1]:
         for dy in [-1,0,1]:
-            target_x = x+dx
-            target_y = y+dy            
+            target_x = x + dx
+            target_y = y + dy            
             if 0 <= target_x < nCol and 0 <= target_y < nRow:
                 if board[target_y][target_x] != "*":
                     board[target_y][target_x] += 1  
