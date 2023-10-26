@@ -1,8 +1,8 @@
-def sort_auctioneers(auctioneer_dict:dict):
+def sort_auctioneers(auctioneer_dict: dict):
     ls = [auc for auc in auctioneer_dict]
     ls.sort()
     new_dict = {}
-     
+
     for item in ls:
         new_dict[item] = auctioneer_dict[item]
 
@@ -31,10 +31,10 @@ while True:
         break
     if len(auction_ls) != 2:
         continue
-    
+
     input_auctioneer, priece = auction_ls
     priece = float(priece)
-    if priece < 0:
+    if priece <= 0:
         continue
     if input_auctioneer not in auctioneers:
         auctioneers[input_auctioneer] = [priece, 1]
@@ -45,11 +45,12 @@ while True:
 
 if len(auctioneers) > 0:
     auctioneers = sort_auctioneers(auctioneers)
-    #print(auctioneers)
+    # print(auctioneers)
 
     for auctioneer in auctioneers:
         times = "times" if auctioneers[auctioneer][1] > 1 else "time"
-        print(f"{auctioneer} bid at the price of {auctioneers[auctioneer][0]:.1f} baht in {auctioneers[auctioneer][1]} {times}.")
+        print(
+            f"{auctioneer} bid at the price of {auctioneers[auctioneer][0]:.1f} baht in {auctioneers[auctioneer][1]} {times}.")
 
     print(f"The winner is {winner}.")
 '''

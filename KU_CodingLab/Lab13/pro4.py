@@ -51,6 +51,7 @@ def invalid(start_d, end_d, first_sun):
     if wrong_day_start or wrong_day_end or wrong_first_sun:
         err_count += 1
         print("Wrong Day")
+
     return err_count >= 1
 
 
