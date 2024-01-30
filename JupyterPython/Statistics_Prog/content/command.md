@@ -102,6 +102,12 @@ stats.t.sf(x, df, loc=0, scale=1)#: Survival function (1 - cdf — sometimes mor
 stats.t.isf(1-cumu_p, df, loc=0, scale=1)#: Inverse survival function (inverse of sf).
 ```
 
+## Statasmodel
+
+```Python
+from statsmodel.stats.weightstats import ztest
+```
+
 # Midterm exam Guide
 
 ### 1. ความหมายของประชากรและตัวอย่าง
